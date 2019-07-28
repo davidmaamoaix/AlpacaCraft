@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BlockState: MonoBehaviour {
 
-	private Vector3Int pos;
+	protected Vector3Int pos;
 	private bool isVirtual {get;}
 	private Block block {get;}
 

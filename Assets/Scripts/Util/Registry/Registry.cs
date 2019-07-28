@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Registry {
+public class Registry<T> where T: Registry<T> {
 
 	private string registryName;
 
@@ -10,9 +10,12 @@ public class Registry {
 		return this.registryName;
 	}
 
-	public void setRegistryName(string name) {
+	public T setRegistryName(string name) {
 		if (this.registryName != null) {
-			throw(new RegistryException(this.registryName + " already has an registry name."));
+			throw(new RegistryException(this.registryName + "has already been assigned a registry name."));
 		}
+
+		this.registryName = name;
+		return (T) this;
 	}
 }
