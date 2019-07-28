@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IStateProvider {
+public interface IBlockProvider {
 
-	BlockState getBlockState(Vector3Int pos);
+	Block getBlock(Vector3Int pos);
 }

@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block: Registry<Block> {
+public class Block: MonoBehaviour {
 
-	public static Block AIR = new Block(new Property().hardness(0));
-	public static Block DIRT = new Block(new Property().hardness(1));
+	public float hardness;
+	public Material material;
 
-	private Property property;
+	private Renderer blockRenderer;
+	private bool hover;
 
-	public Block(Property property) {
-		this.property = property;
+	public Block(float hardness) {
+		this.hardness = hardness;
 	}
 
-	public BlockState getDefaultState() {
-		return new SimpleBlockState(this);
+	void Start() {
+		this.blockRenderer = this.GetComponent<Renderer>();
 	}
 
-	public class Property {
+	void Update() {
+		this.blockRenderer.material = this.hover ? Blocks.INSTANCE.WHITE : this.material;
 
-		private float hard;
+		this.hover = false;
+	}
 
-		public Property hardness(float hard) {
-			this.hard = hard;
-			return this;
-		}
-
-		public float getHardness() {
-			return this.hard;
-		}
+	public void setHover() {
+		this.hover = true;
 	}
 }

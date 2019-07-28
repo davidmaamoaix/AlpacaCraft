@@ -19,17 +19,21 @@ public class ChunkMap<K, C, V> {
 	}
 
 	public V get(K keyA, C keyB) {
-		Dictionary<C, V> layer = this.chunkMap[keyA];
-		if (layer == null) {
+		Dictionary<C, V> layer;
+		if (this.chunkMap.ContainsKey(keyA)) {
+			layer = this.chunkMap[keyA];
+		} else {
 			return default(V);
 		}
 
-		return layer[keyB];
+		return layer.ContainsKey(keyB) ? layer[keyB] : default(V);
 	}
 
 	public V set(K keyA, C keyB, V value) {
-		Dictionary<C, V> layer = this.chunkMap[keyA];
-		if (layer == null) {
+		Dictionary<C, V> layer;
+		if (this.chunkMap.ContainsKey(keyA)) {
+			layer = this.chunkMap[keyA];
+		} else {
 			layer = new Dictionary<C, V>();
 			this.chunkMap.Add(keyA, layer);
 		}

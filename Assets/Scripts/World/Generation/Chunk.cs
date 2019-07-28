@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Chunk: IStateProvider {
+public abstract class Chunk: IBlockProvider {
 
 	private const int LENGTH = 16 * 256 * 16;
 
-	protected BlockState[] blockStates;
+	protected Block[] blocks;
 
 	public Chunk() {
-		this.blockStates = new BlockState[LENGTH];
+		this.blocks = new Block[LENGTH];
 	}
 
-	public BlockState getBlockState(Vector3Int pos) {
-		return this.blockStates[getIndex(pos.x >> 4, pos.y, pos.z >> 4)] ?? Block.AIR.getDefaultState();
+	public Block getBlock(Vector3Int pos) {
+		return this.blocks[getIndex(pos.x >> 4, pos.y, pos.z >> 4)];
 	}
 
 	protected static int getIndex(int x, int y, int z) {
